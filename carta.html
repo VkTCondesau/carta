@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta para Mi Amor</title>
+  <style>
+    html, body {
+	height: 100%;
+      margin: 0;
+	padding: 0;
+      overflow: hidden;
+      background-color: #000;
+      font-family: 'Georgia', serif;
+      color: white;
+    }
+
+    /* FLORES FLOTANTES */
+    .flores {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .flor {
+      position: absolute;
+      font-size: 80px;
+      animation: flotar 10s linear infinite;
+      opacity: 2.0;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      60% { opacity: 1; }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .pantalla-inicial, .carta {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 1s ease;
+    }
+
+    .pantalla-inicial {
+      background-color: rgba(0, 0, 0, 0.8);
+      flex-direction: column;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .pantalla-inicial h2 {
+      color: #ff99cc;
+      margin-bottom: 20px;
+    }
+
+    .pantalla-inicial button {
+      background-color: #ff4da6;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(255, 77, 166, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .pantalla-inicial button:hover {
+      transform: scale(1.05);
+    }
+
+    .carta {
+  	opacity: 0;
+	display: block;
+	pointer-events: none;
+  	overflow-y: auto;
+  	padding: 20px;
+  	background-color: rgba(0, 0, 0, 0.95);
+  	z-index: 2;
+  	flex-direction: column;
+  	box-sizing: border-box;
+  	opacity: 0;
+  	pointer-events: none;
+	}
+
+    .carta.visible {
+      opacity: 1;
+      pointer-events: auto;
+      animation: fadeIn 1s ease;
+    }
+
+    .contenido-carta {
+	width: 100%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 77, 166, 0.4);
+      text-align: center;
+      animation: slideUp 1s ease;
+	margin: 40px auto;
+	box-sizing: border-box;
+    }
+
+    h1 {
+      color: #ff66cc;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #f0f0f0;
+      text-align: justify;
+    }
+
+    .foto {
+      width: 100%;
+      max-width: 300px;
+	height: auto;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      animation: zoomIn 1s ease;
+      border: 3px solid #ff99cc;
+    }
+
+    .firma {
+      text-align: right;
+      margin-top: 30px;
+      font-style: italic;
+      color: #ffccff;
+    }
+
+    /* Animaciones carta */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🌸 Flores flotantes -->
+  <div class="flores">
+    <!-- Puedes duplicar aún más flores -->
+    <div class="flor" style="left: 5%; animation-delay: 0s;">🌸</div>
+    <div class="flor" style="left: 15%; font-size: 80px; animation-delay: 2s;">🌺</div>
+    <div class="flor" style="left: 25%; font-size: 80px; animation-delay: 4s;">🌼</div>
+    <div class="flor" style="left: 35%; font-size: 80px; animation-delay: 1s;">🌷</div>
+    <div class="flor" style="left: 50%; font-size: 80px; animation-delay: 3s;">🌸</div>
+    <div class="flor" style="left: 60%; font-size: 80px; animation-delay: 5s;">🌹</div>
+    <div class="flor" style="left: 70%; font-size: 80px; animation-delay: 6s;">🌺</div>
+    <div class="flor" style="left: 80%; font-size: 80px; animation-delay: 1.5s;">🌼</div>
+    <div class="flor" style="left: 90%; font-size: 80px; animation-delay: 3.5s;">🌷</div>
+    <div class="flor" style="left: 5%; animation-delay: 0s;">🌸</div>
+  </div>
+
+  <!-- Pantalla inicial -->
+  <div class="pantalla-inicial" id="inicio">
+    <h2>Tengo algo muy especial para ti mi niña ❤</h2>
+    <button onclick="mostrarCarta()">Haz clic para ver mi carta</button>
+  </div>
+
+  <!-- Carta -->
+  <div class="carta" id="carta">
+    <div class="contenido-carta">
+      <h1>Para el amor de mi vida</h1>
+      <img src="foto 1.jpg" alt="Nosotros" class="foto">
+      <p>
+        Mi vida, cada día que pasa me doy cuenta de lo afortunado que soy de tenerte a mi lado
+        y te escribo esta carta para disculparme por lo que paso anoche, estuve analizando 
+  	y reflexionando lo que me dijiste y lo que te causo que te sintieras mal, ya no tratare 
+	de justificarme ni de poner excusas asi que sere totalmente honesto contigo sobre lo que sucedio,
+	no quiero que sigas pensando que trato de ocultarte, esa no es ni sera mi intencion y si 
+	estaba conectado mi celular a la camioneta pero mi papá venia viendo y escuchando el partido 
+	de la seleccion mexicana y cuando tu llamaste no pude ccontestar porque mi celular lo tenia mi papá 
+	en la mano, me dijo que si queria contestar y le dije que no porque se escuharia en las vocinas
+	de la camioneta y aparte ya ibamos a llegar a la casa, te repito no quiero ocultarte pero yo no me 
+	siento comodo conque escuchen mis conversaciones por las bocinas entonces pues ya mi papá 
+	le presiono en rechazar las 2 veces y eso fue lo que paso, no es ninguna excusa solo explique 
+	la situacion como ocurrio estoy siendo totalmente honesto contigo y de nuevo te pido disculpas 
+	si esas acciones te hicieron sentir mal, yo no quiero estra peleado contigo y tambien quiero 
+	disculparme por la forma en que te respondi, me gano el enojo y yo se que no es la foma adecuada 
+	sobre todo por lo que habiamos acordado, sobre todo porque tu si me lo quisiste comentar y yo
+	me puse a la defensiva de verdad perdoname por todo, se que es dificl querer a alguien como yo
+	pero quiero que estemos bien, me siento muy mal con lo que te dije y te hice sentir 
+	y me gustaria que me digas si te sientas lista para hablarlo y podamos resolverlo
+	te quiero, te adoro y te extraño muchisimo ❤.
+      </p>
+      <p>
+      </p>
+      <p class="firma">
+        Con todo mi cariño,<br>
+        [DANIEL ❤]
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function mostrarCarta() {
+      document.getElementById('inicio').style.display = 'none';
+      document.getElementById('carta').classList.add('visible');
+    }
+  </script>
+
+</body>
+</html>
